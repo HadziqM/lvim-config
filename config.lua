@@ -11,14 +11,14 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
-lvim.colorscheme = "lunar"
+lvim.colorscheme = "alduin"
 lvim.transparent_window = true
 
 
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- to disable icons and use a minimalist setup, uncomment the following
--- lvim.use_icons = false
+lvim.use_icons = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -27,12 +27,24 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["|"]=":vsplit<cr>"
 lvim.keys.normal_mode["-"]=":split<cr>"
 lvim.keys.normal_mode["<Tab>"] = ":bnext<cr>"
-lvim.keys.normal_mode["<S-Tab>"] = ":bprev<cr>"
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
--- unmap a default keymapping
+lvim.keys.normal_mode["<S-Tab>"] = ":bd<cr>"
+lvim.keys.normal_mode["<C-Tab>"] = ":bprev<cr>"
+lvim.keys.normal_mode['<M-Up>'] = ":m .-2<cr>=="
+lvim.keys.normal_mode['<M-Down>'] = ":m .+1<cr>=="
+lvim.keys.normal_mode["<M-S-Down>"]="yyp<end>"
+lvim.keys.normal_mode["<M-S-Up>"]="yyP<end>"
+lvim.keys.visual_mode["<M-Up>"]=":m '<-2<cr>gv-gv"
+lvim.keys.visual_mode["<M-Down>"]=":m '>+1<cr>gv-gv"
+lvim.keys.visual_mode["<M-S-Down>"]="yP`[gv-gv"
+lvim.keys.visual_mode["<M-S-Up>"]="y`]p`]gv-gv"
+-- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>
+-- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>
+-- unmap a default keymappinaaa
 -- vim.keymap.del("n", "<C-Up>")
--- override a default keymapping
+-- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>
+-- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>
+-- unmap a default keymappinaaa
+-- vim.keymap.del("n", "<C-Up>")
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
@@ -184,7 +196,8 @@ lvim.plugins = {
   'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr','menuitem'
 }
       }
-    end,}
+    end,},
+  {"AlessandroYorba/Alduin"}
 }
 
 -- generic LSP settings
