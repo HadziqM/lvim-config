@@ -43,12 +43,13 @@ lvim.keys.normal_mode["<C-Left>"]= "<C-W><Left>"
 lvim.keys.normal_mode["<C-Down>"]= "<C-W><Down>"
 lvim.keys.normal_mode["<C-Up>"]= "<C-W><Up>"
 
--- mimic vscode text move and copy line that i made myself
 
 -- <leader>e for toogle Nvim-Tree
 -- <leader>\ or <M-1> or <M-2> dst. to toogle terminal
 -- <leader>f to toogle Telecope finding file
 -- <leader>/ in visual or normal mode to toogle comment
+
+-- mimic vscode text move and copy line that i made myself
 
 lvim.keys.normal_mode['<M-Up>'] = ":m .-2<cr>=="
 lvim.keys.normal_mode['<M-Down>'] = ":m .+1<cr>=="
@@ -59,12 +60,12 @@ lvim.keys.visual_mode["<M-Down>"]=":m '>+1<cr>gv-gv"
 lvim.keys.visual_mode["<M-S-Down>"]="yP`[gv-gv"
 lvim.keys.visual_mode["<M-S-Up>"]="y`]p`]gv-gv"
 
--- almost like vscode mapping, except the multiple cursor
+-- with this we got almost like vscode mapping, except the multiple cursor
 
 -- # how to mimic vscode ctrl-d and the multiple cursor actions
 
 -- ## change highlighted text
--- run serach by "/item_search<cr>"
+-- run search by "/item_search<cr>"
 -- change the first or any order highlighted item by "cgn" and go normal mode
 -- make next highlighted item same edit with "."
 -- skip editing and move next with "n"
