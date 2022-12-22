@@ -1,34 +1,55 @@
---[[
-lvim is the global options object
-
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-
--- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
 lvim.colorscheme = "alduin"
 lvim.transparent_window = true
-
+lvim.use_icons = true
 
 vim.opt.relativenumber = false
 
--- to disable icons and use a minimalist setup, uncomment the following
-lvim.use_icons = true
+-- need to instal clipboard provider (i m using xclip for linux)
+-- note that with this you could paste on insert mode with terminal keybind (<C-S-v> for me)
+vim.opt.clipboard = "unnamedplus"
 
--- keymappings [view all the defaults by pressing <leader>Lk]
+
 lvim.leader = "space"
--- add your own keymapping
+
+-- <M> is alt
+-- <S> is shift
+-- <C> is Ctrl
+-- <cr> is enter
+-- run :map to see all keymap
+
+-- save and quit
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<C-q>"] = ":wq<cr>"
+lvim.keys.normal_mode["<C-S-q>"]=":q!<cr>"
+
+-- buffer management
+-- split screen
 lvim.keys.normal_mode["|"]=":vsplit<cr>"
 lvim.keys.normal_mode["-"]=":split<cr>"
+lvim.keys.normal_mode["<f2>"]=":on<cr>"
+-- buffer action
 lvim.keys.normal_mode["<Tab>"] = ":bnext<cr>"
 lvim.keys.normal_mode["<S-Tab>"] = ":bd<cr>"
 lvim.keys.normal_mode["<C-Tab>"] = ":bprev<cr>"
+-- screen action
+lvim.keys.normal_mode["<C-S-Right>"]=":vertical resize +2"
+lvim.keys.normal_mode["<C-S-Left>"]=":vertical resize -2"
+lvim.keys.normal_mode["<C-S-Down>"]=":resize +2"
+lvim.keys.normal_mode["<C-S-Up>"]=":resize -2"
+lvim.keys.normal_mode["<C-Right>"]= "<C-W><Right>"
+lvim.keys.normal_mode["<C-Left>"]= "<C-W><Left>"
+lvim.keys.normal_mode["<C-Down>"]= "<C-W><Down>"
+lvim.keys.normal_mode["<C-Up>"]= "<C-W><Up>"
+
+-- mimic vscode text move and copy line that i made myself
+
+-- <leader>e for toogle Nvim-Tree
+-- <leader>\ or <M-1> or <M-2> dst. to toogle terminal
+-- <leader>f to toogle Telecope finding file
+-- <leader>/ in visual or normal mode to toogle comment
+
 lvim.keys.normal_mode['<M-Up>'] = ":m .-2<cr>=="
 lvim.keys.normal_mode['<M-Down>'] = ":m .+1<cr>=="
 lvim.keys.normal_mode["<M-S-Down>"]="yyp<end>"
@@ -37,48 +58,37 @@ lvim.keys.visual_mode["<M-Up>"]=":m '<-2<cr>gv-gv"
 lvim.keys.visual_mode["<M-Down>"]=":m '>+1<cr>gv-gv"
 lvim.keys.visual_mode["<M-S-Down>"]="yP`[gv-gv"
 lvim.keys.visual_mode["<M-S-Up>"]="y`]p`]gv-gv"
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>
--- unmap a default keymappinaaa
--- vim.keymap.del("n", "<C-Up>")
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>
--- unmap a default keymappinaaa
--- vim.keymap.del("n", "<C-Up>")
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
+-- almost like vscode mapping, except the multiple cursor
 
--- Change theme settings
--- lvim.builtin.theme.options.dim_inactive = true
--- lvim.builtin.theme.options.style = "storm"
+-- # how to mimic vscode ctrl-d and the multiple cursor actions
 
--- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
--- }
+-- ## change highlighted text
+-- run serach by "/item_search<cr>"
+-- change the first or any order highlighted item by "cgn" and go normal mode
+-- make next highlighted item same edit with "."
+-- skip editing and move next with "n"
+-- <leader>h to stop hightlight
+
+-- ## delete highlighted text
+-- same with change but using "gn" for selected action
+-- then "d" for delete highlighted
+-- "n" then "." to delete next item
+
+-- ** alternatively you could use ":%s/item_search/item_chhanged/g" to change or delete all
+
+-- ## mimic multiple cursor with visual block (change same line position)
+-- go to visual mode by <C-v>
+-- add line by arrow key or "j" or "k"
+-- press <S-i> to go insert mode on first item
+-- <esc> to go normal mode, and all the line automatically change
+
+-- ## change multiple line in different position
+-- this only possible by recording macro on one line then replay it on other line
+-- start recording keystrokes and command by input "qq"
+-- end the record with "q"
+-- then replay the recorded by "@q"
+
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -89,6 +99,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
+-- this for treesitter colouring your text
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
@@ -102,16 +113,20 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "go",
+  "svelte",
+  "toml"
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
 
+-- custom plugins and its config
+
 lvim.plugins = {
   {
    "simrat39/rust-tools.nvim",
-    -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
     config = function()
       require("rust-tools").setup {
         tools = {
@@ -181,8 +196,7 @@ lvim.plugins = {
     workspace_text      = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
     line_number_text    = "Line %s out of %s",        -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
-    end,
-  },
+    end},
   {"windwp/nvim-ts-autotag",
     config = function()
       require('nvim-ts-autotag').setup{
@@ -193,106 +207,8 @@ lvim.plugins = {
     'glimmer','handlebars','hbs'},
         skip_tags = {
   'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'slot',
-  'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr','menuitem'
-}
+  'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr','menuitem'}
       }
-    end,},
+    end},
   {"AlessandroYorba/Alduin"}
 }
-
--- generic LSP settings
-
--- -- make sure server will always be installed even if the server is in skipped_servers list
--- lvim.lsp.installer.setup.ensure_installed = {
---     "sumneko_lua",
---     "jsonls",
--- }
--- -- change UI setting of `LspInstallInfo`
--- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
--- lvim.lsp.installer.setup.ui.check_outdated_servers_on_open = false
--- lvim.lsp.installer.setup.ui.border = "rounded"
--- lvim.lsp.installer.setup.ui.keymaps = {
---     uninstall_server = "d",
---     toggle_server_expand = "o",
--- }
-
--- ---@usage disable automatic installation of servers
--- lvim.lsp.installer.setup.automatic_installation = false
-
--- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
--- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
-
--- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
--- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
--- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
---   return server ~= "emmet_ls"
--- end, lvim.lsp.automatic_configuration.skipped_servers)
-
--- -- you can set a custom on_attach function that will be used for all the language servers
--- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
-
--- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
-
--- -- set additional linters
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
---   {
---     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "shellcheck",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--severity", "warning" },
---   },
---   {
---     command = "codespell",
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "javascript", "python" },
---   },
--- }
-
--- Additional Plugins
--- lvim.plugins = {
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
--- }
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "zsh",
---   callback = function()
---     -- let treesitter use bash highlight for zsh files as well
---     require("nvim-treesitter.highlight").attach(0, "bash")
---   end,
--- })
