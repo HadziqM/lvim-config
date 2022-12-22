@@ -24,6 +24,10 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<C-q>"] = ":wq<cr>"
 lvim.keys.normal_mode["<C-S-q>"]=":q!<cr>"
 
+-- restart lsp server when there is touble running
+lvim.keys.normal_mode["<C-;>"]=":LspStart<cr>"
+
+
 -- buffer management
 -- split screen
 lvim.keys.normal_mode["|"]=":vsplit<cr>"
@@ -76,7 +80,7 @@ lvim.keys.visual_mode["<M-S-Up>"]="y`]p`]gv-gv"
 -- then "d" for delete highlighted
 -- "n" then "." to delete next item
 
--- ** alternatively you could use ":%s/item_search/item_chhanged/g" to change or delete all
+-- ** alternatively you could use ":%s/item_search/item_changed/g" to change or delete all
 
 -- ## mimic multiple cursor with visual block (change same line position)
 -- go to visual mode by <C-v>
