@@ -38,10 +38,10 @@ lvim.keys.normal_mode["<Tab>"] = ":bnext<cr>"
 lvim.keys.normal_mode["<S-Tab>"] = ":bd<cr>"
 lvim.keys.normal_mode["<C-Tab>"] = ":bprev<cr>"
 -- screen action
-lvim.keys.normal_mode["<C-S-Right>"]=":vertical resize +2"
-lvim.keys.normal_mode["<C-S-Left>"]=":vertical resize -2"
-lvim.keys.normal_mode["<C-S-Down>"]=":resize +2"
-lvim.keys.normal_mode["<C-S-Up>"]=":resize -2"
+lvim.keys.normal_mode["<C-S-Right>"]=":vertical resize +2<cr>"
+lvim.keys.normal_mode["<C-S-Left>"]=":vertical resize -2<cr>"
+lvim.keys.normal_mode["<C-S-Down>"]=":resize +2<cr>"
+lvim.keys.normal_mode["<C-S-Up>"]=":resize -2<cr>"
 lvim.keys.normal_mode["<C-Right>"]= "<C-W><Right>"
 lvim.keys.normal_mode["<C-Left>"]= "<C-W><Left>"
 lvim.keys.normal_mode["<C-Down>"]= "<C-W><Down>"
@@ -125,6 +125,8 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
+lvim.builtin.treesitter.rainbow.enable= true
+
 
 
 -- custom plugins and its config
@@ -177,6 +179,28 @@ lvim.plugins = {
       }
     end,
   },
+  {"MunifTanjim/prettier.nvim",
+    config = function ()
+      require("prettier"):setup({
+        bin = 'prettier', -- or `'prettierd'` (v0.22+)
+         filetypes = {
+           "css",
+           "graphql",
+           "html",
+           "javascript",
+           "javascriptreact",
+           "json",
+           "less",
+           "markdown",
+           "scss",
+           "rust",
+           "go",
+           "typescript",
+           "typescriptreact",
+           "yaml",
+         },
+      })
+    end},
    {"andweeb/presence.nvim",
     config = function()
     require("presence"):setup({
@@ -215,5 +239,6 @@ lvim.plugins = {
   'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr','menuitem'}
       }
     end},
-  {"AlessandroYorba/Alduin"}
+  {"AlessandroYorba/Alduin"},
+  {"p00f/nvim-ts-rainbow"},
 }
