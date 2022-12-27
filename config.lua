@@ -46,6 +46,9 @@ lvim.keys.normal_mode["<C-Right>"]= "<C-W><Right>"
 lvim.keys.normal_mode["<C-Left>"]= "<C-W><Left>"
 lvim.keys.normal_mode["<C-Down>"]= "<C-W><Down>"
 lvim.keys.normal_mode["<C-Up>"]= "<C-W><Up>"
+--select all
+lvim.keys.normal_mode["<C-a>"]="gg<S-v>G"
+
 
 
 -- <leader>e for toogle Nvim-Tree
@@ -171,7 +174,7 @@ lvim.plugins = {
             require("lvim.lsp").common_on_attach(client, bufnr)
             local rt = require "rust-tools"
             -- Hover actions
-            vim.keymap.set("n", "<C-a>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
             -- Code action groups
             vim.keymap.set("n", "<C-q>", rt.code_action_group.code_action_group, { buffer = bufnr })
           end,
