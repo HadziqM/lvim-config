@@ -67,6 +67,14 @@ lvim.keys.visual_mode["<M-Down>"]=":m '>+1<cr>gv-gv"
 lvim.keys.visual_mode["<M-S-Down>"]="yP`[gv-gv"
 lvim.keys.visual_mode["<M-S-Up>"]="y`]p`]gv-gv"
 
+lvim.keys.insert_mode["<C-v>"]="<esc><Right>v"
+lvim.keys.insert_mode["<C-a>"]="<esc>gg<S-v>G"
+lvim.keys.insert_mode["<M-Up"]="<esc>:m .-2<cr>=="
+lvim.keys.insert_mode['<M-Down>'] = "<esc>:m .+1<cr>=="
+lvim.keys.insert_mode["<M-S-Down>"]="<esc>yyp<end>a"
+lvim.keys.insert_mode["<M-S-Up>"]="<esc>yyP<end>a"
+
+
 -- with this we got almost like vscode mapping, except the multiple cursor
 
 -- # how to mimic vscode ctrl-d and the multiple cursor actions
